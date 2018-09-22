@@ -1,5 +1,5 @@
 import React from 'react';
-
+import pt from 'prop-types';
 
 /**
  * Компонент который возвращает поздравление
@@ -7,7 +7,7 @@ import React from 'react';
  * @param {object} props - React props
  * @returns {JSX.component}
  */
-export default (props) => (
+const Congrats = (props) => (
   <div
     data-test="component-congrats"
   >
@@ -17,4 +17,14 @@ export default (props) => (
       )
     }
   </div>
-)
+);
+
+Congrats.propTypes = {
+  success: pt.bool.isRequired
+};
+
+Congrats.defaultProps = {
+  success: false
+};
+
+export default Congrats;
