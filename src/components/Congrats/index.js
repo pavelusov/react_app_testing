@@ -13,7 +13,10 @@ const Congrats = (props) => (
   >
     {
       props.success && (
-        <div data-test="congrats-message">congratulations</div>
+        <div
+          className="alert alert-success"
+          data-test="congrats-message">Congratulations! Вы угадали слово!
+        </div>
       )
     }
   </div>
