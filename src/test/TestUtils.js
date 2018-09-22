@@ -10,7 +10,7 @@ import reducers from '../redux/reducers';
  * @return {Store} - Redux store
  */
 export const storeFactory = (initialState) => {
-  return createStore(reducers);
+  return createStore(reducers, initialState);
 };
 
 /**
