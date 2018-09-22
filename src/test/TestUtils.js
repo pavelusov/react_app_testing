@@ -1,5 +1,17 @@
 import checkPropTypes from 'check-prop-types';
-import Congrats from "../components/Congrats";
+
+// Helper redux
+import { createStore } from 'redux';
+import reducers from '../redux/reducers';
+
+/**
+ * @function storeFactory
+ * @param initialState - initial state
+ * @return {Store} - Redux store
+ */
+export const storeFactory = (initialState) => {
+  return createStore(reducers);
+};
 
 /**
  * @function findByTestAttr
