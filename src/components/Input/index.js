@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { guessWord } from "../../redux/actions";
 
 class Input extends Component {
   render() {
@@ -19,7 +20,8 @@ class Input extends Component {
             data-test="submit-button"
             className="btn btn-primary mb-2"
             type="submit"
-          >Submit</button>
+          >Submit
+          </button>
         </form>
       );
 
@@ -27,7 +29,7 @@ class Input extends Component {
       <div
         data-test="component-input"
       >
-        { contents }
+        {contents}
       </div>
     )
   }
@@ -37,4 +39,12 @@ const mapStateToProps = ({ success }) => {
   return { success };
 };
 
-export default connect(mapStateToProps)(Input);
+const dispatchToProps = ()=>{
+  return {
+    actions: {
+      guessWord
+    }
+  }
+};
+
+export default connect(mapStateToProps, dispatchToProps)(Input);
