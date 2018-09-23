@@ -1,7 +1,6 @@
-import axios from 'axios';
-
-
 import { getLetterMatchCount } from '../../services';
+
+const axios = require('axios');
 
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
@@ -53,13 +52,19 @@ export const guessWord = (guessedWord) => {
 };
 
 export const getSecretWord = () => {
+
   return (dispatch) => {
+
     return axios.get('https://jsonplaceholder.typicode.com/users/1')
       .then(res => {
+
         dispatch({
           type: actionTypes.SET_SECRET_WORD,
-          payload: res.data
+          payload: res.data.username
         })
+      })
+      .catch((e) => {
       });
+
   }
 };

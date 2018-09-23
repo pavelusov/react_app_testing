@@ -1,7 +1,8 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { guessWord } from "../../redux/actions";
+import { getSecretWord, guessWord } from "../../redux/actions";
 
 export class UnconnectedInput extends Component {
   constructor() {
@@ -12,7 +13,7 @@ export class UnconnectedInput extends Component {
   onSubmitGuessedWord = (e) => {
     e.preventDefault();
     const guessedWord = this.refInputBox.current.value;
-
+    console.log('onSubmitGuessedWord')
     if (guessedWord && guessedWord.length > 0) {
       this.props.actions.guessWord(guessedWord);
     }
@@ -57,10 +58,10 @@ const mapStateToProps = ({ success }) => {
   return { success };
 };
 
-const dispatchToProps = ()=>{
+const dispatchToProps = (dispatch)=>{
   return {
     actions: {
-      guessWord
+      guessWord: bindActionCreators(guessWord, dispatch)
     }
   }
 };

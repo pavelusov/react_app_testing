@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { getSecretWord } from "./redux/actions";
 import './App.css';
@@ -20,10 +21,11 @@ export class UnconnectedApp extends Component {
   }
 
   render() {
-    const {success, guessedWords} = this.props;
+    const { success, guessedWords } = this.props;
     return (
       <div className="App container">
         <h1>Game</h1>
+        <div>The secret word is {this.props.secretWord}</div>
         <Congrats
           success={success}
         />
@@ -40,10 +42,11 @@ const mapStateToProps = ({ success, secretWord, guessedWords }) => {
   return { success, secretWord, guessedWords };
 };
 
-const dispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    actions: {getSecretWord}
+    actions: {
+      getSecretWord: bindActionCreators(getSecretWord, dispatch) }
   };
 };
 
-export default connect(mapStateToProps, dispatchToProps)(UnconnectedApp);
+export default connect(mapStateToProps, mapDispatchToProps)(UnconnectedApp);
