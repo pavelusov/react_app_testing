@@ -112,4 +112,10 @@ describe('"guessWord" action creator call', () => {
     expect(guessWordArgument).toBe(guessedWord)
   });
 
+  test('input box clears on submit', () => {
+    const inputValue = wrapper.instance().refInputBox.current.value;
+
+    expect(inputValue).toBe('')
+  })
+
 });
