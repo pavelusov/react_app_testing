@@ -1,3 +1,5 @@
+import { getLetterMatchCount } from '../../services';
+
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
   GUESS_WORD: 'GUESS_WORD'
@@ -14,12 +16,34 @@ export function correctGuess() {
 }
 
 /**
+ * @function guessWordCreator
+ * @param {object} word - guess word
+ * @param {string} word.guessedWord - guess word
+ * @param {number} word.letterMatchCount - letter match count
+ * @returns {{type: string, payload: {object}}}
+ */
+export function guessWordCreator(word) {
+  return {
+    type: actionTypes.GUESS_WORD,
+    payload: word
+  }
+}
+
+
+/**
  * @function guessWord - Thunk actions for guess word
- * @param guessedWord - guessedWord
+ * @param {string} guessedWord - guessedWord
  * @returns {Function}
  */
 export const guessWord = (guessedWord) => {
   return (dispatch, getState) => {
+    const secretWord = getState().secretWord;
+    const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
 
+    dispatch(guessWordCreator({ guessedWord, letterMatchCount }))
+
+    if (guessedWord === secretWord) {
+      dispatch(correctGuess())
+    }
   };
 };
