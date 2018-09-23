@@ -1,8 +1,12 @@
+import axios from 'axios';
+
+
 import { getLetterMatchCount } from '../../services';
 
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
-  GUESS_WORD: 'GUESS_WORD'
+  GUESS_WORD: 'GUESS_WORD',
+  SET_SECRET_WORD: 'SET_SECRET_WORD'
 };
 
 /**
@@ -42,8 +46,20 @@ export const guessWord = (guessedWord) => {
 
     dispatch(guessWordCreator({ guessedWord, letterMatchCount }))
 
-    if (guessedWord === secretWord) {
+    if ( guessedWord === secretWord ) {
       dispatch(correctGuess())
     }
   };
+};
+
+export const getSecretWord = () => {
+  return (dispatch) => {
+    return axios.get('https://jsonplaceholder.typicode.com/users/1')
+      .then(res => {
+        dispatch({
+          type: actionTypes.SET_SECRET_WORD,
+          payload: res.data
+        })
+      });
+  }
 };
