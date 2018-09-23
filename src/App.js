@@ -13,7 +13,11 @@ const guessedWords = [
   { guessedWord: 'party', letterMatchCount: 5 }
 ];
 
-class App extends Component {
+export class UnconnectedApp extends Component {
+
+  componentDidMount() {
+    this.props.actions.getSecretWord();
+  }
 
   render() {
     const {success, guessedWords} = this.props;
@@ -39,7 +43,7 @@ const mapStateToProps = ({ success, secretWord, guessedWords }) => {
 const dispatchToProps = () => {
   return {
     actions: {getSecretWord}
-  }
+  };
 };
 
-export default connect(mapStateToProps, dispatchToProps)(App);
+export default connect(mapStateToProps, dispatchToProps)(UnconnectedApp);
